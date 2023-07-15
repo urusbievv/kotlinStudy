@@ -8,4 +8,5 @@ fun main() {
         val prim = readLine()
     } while (prim == "")
     println("Доставка оформлена")
+
 }

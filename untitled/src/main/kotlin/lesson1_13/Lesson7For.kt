@@ -36,7 +36,7 @@ fun main() {
 //        println(i)
 
 
-    for (i in 5 downTo 1 ){
+    for (i in 5 downTo  1 ){
         if(i == 3){
 //            println("Пользоветель нажал \"Пропустить\" ")
 //            break
