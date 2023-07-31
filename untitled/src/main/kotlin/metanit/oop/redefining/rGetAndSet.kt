@@ -41,13 +41,28 @@ open class Employee(name: String, protected val company: String) : PersonL(name)
 
 
 // Стоит учитывать, что переопределить функции можно по всей иерархии наследования
-class Manager(name: String, company: String) : Employee(name, company) {
+open class Manager(name: String, company: String, protected val position: String) : Employee(name, company) {
 
     override val fullInfo: String
-        get() = "Name: $name Company: $company  Position: Manager"
+        get() = "Name: $name Company: $company  Position: $position"
 
-    override fun display() = println(fullInfo)
+	// final - чтобы запретить дальнейшее переопределение
+    final override fun display() = println(fullInfo)
 
+}
+
+
+class Assistant(name: String, company: String, position: String) : Manager(name,company,position) {
+
+
+    // слова super в производном классе можно обращаться к реализации из родительского класса.
+    override val fullInfo: String
+        get() = super.fullInfo
+
+    //override - будет ошибка, поставили в методе класса наследника "final"
+    /*
+    	override fun display() = println(fullInfo)
+     */
 }
 
 
@@ -62,8 +77,11 @@ fun main() {
     val employee = Employee("Bob", "DNS")
     employee.display()
 
-    val manager = Manager("Alex Employee","DNS")
+    val manager = Manager("Alex Employee","DNS","Manager")
     manager.display()
+
+    val assistant = Assistant("Jerri Employee","DNS","Assistant")
+    println(assistant.fullInfo)
 
 
 
